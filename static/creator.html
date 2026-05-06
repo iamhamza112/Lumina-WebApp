@@ -140,7 +140,7 @@
 <script src="/static/js/auth.js"></script>
 <script src="/static/js/creator.js"></script>
 <script>
-  requireAuth('creator');
+  requireAuth('Admin');
   window.addEventListener('DOMContentLoaded',()=>{
     const u=localStorage.getItem('sv_username');
     if(u)document.getElementById('nav-user').textContent=u;
