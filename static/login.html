@@ -107,7 +107,7 @@
 <div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg"></span></div>
 <script src="/static/js/auth.js"></script>
 <script>
-  (function(){const t=getToken(),r=getRole();if(t)window.location.href=r==='creator'?'/studio':'/browse';})();
+  (function(){const t=getToken(),r=getRole();if(t)window.location.href=r==='Admin'?'/studio':'/browse';})();
 
   function switchTab(t){
     document.getElementById('form-in').style.display=t==='in'?'block':'none';
