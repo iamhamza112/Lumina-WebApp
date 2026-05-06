@@ -23,7 +23,7 @@ def seed_defaults():
                 "username":      "Admin",
                 "email":         "admin@lumina.com",
                 "password_hash": pwd.hash("Admin123!"),
-                "role":          "Admin",
+                "role":          "creator",
                 "created_at":    datetime.utcnow().isoformat()
             })
 
