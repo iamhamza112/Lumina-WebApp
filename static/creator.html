@@ -14,7 +14,7 @@
     <a href="/studio" class="nav-link active">Studio</a>
   </div>
   <div class="nav-right">
-    <span class="nav-chip creator">CREATOR</span>
+    <span class="nav-chip creator">Admin</span>
     <span style="font-size:12px;color:var(--ink-3);letter-spacing:.5px" id="nav-user"></span>
     <button class="btn btn-ghost btn-sm" onclick="doLogout()">Sign out</button>
   </div>
@@ -140,7 +140,7 @@
 <script src="/static/js/auth.js"></script>
 <script src="/static/js/creator.js"></script>
 <script>
-  requireAuth('Admin');
+  requireAuth('admin');
   window.addEventListener('DOMContentLoaded',()=>{
     const u=localStorage.getItem('sv_username');
     if(u)document.getElementById('nav-user').textContent=u;
