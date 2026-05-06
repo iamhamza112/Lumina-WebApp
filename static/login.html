@@ -136,7 +136,7 @@
     if(!email)return showAlert('err','Please enter your email.');
     if(!pw)return showAlert('err','Please enter your password.');
     setBusy('in',true);
-    try{const r=await login(email,pw);window.location.href=r.role==='Admin'?'/studio':'/browse';}
+    try{const r=await login(email,pw);window.location.href=r.role==='creator'?'/studio':'/browse';}
     catch(e){showAlert('err',e.message||'Login failed.');}
     finally{setBusy('in',false);}
   }
