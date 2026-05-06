@@ -26,7 +26,7 @@ function multipartHeaders() {
 function requireAuth(role) {
     if (!getToken()) { window.location.href = '/'; return false; }
     if (role && getRole() !== role) {
-        window.location.href = getRole() === 'Admin' ? '/studio' : '/browse';
+        window.location.href = getRole() === 'creator' ? '/studio' : '/browse';
         return false;
     }
     return true;
