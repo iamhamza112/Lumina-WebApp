@@ -17,23 +17,23 @@ def seed_defaults():
         from datetime import datetime
         pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-        if not db.user_by_email("creator@pixelden.com"):
+        if not db.user_by_email("admin@lumina.com"):
             db.create_user({
                 "id":            "default-creator-001",
-                "username":      "Creator",
-                "email":         "creator@pixelden.com",
-                "password_hash": pwd.hash("Creator123!"),
-                "role":          "creator",
+                "username":      "Admin",
+                "email":         "admin@lumina.com",
+                "password_hash": pwd.hash("Admin123!"),
+                "role":          "Admin",
                 "created_at":    datetime.utcnow().isoformat()
             })
 
-        if not db.user_by_email("consumer@pixelden.com"):
+        if not db.user_by_email("user@lumina.com"):
             db.create_user({
                 "id":            "default-consumer-001",
-                "username":      "Consumer",
-                "email":         "consumer@pixelden.com",
-                "password_hash": pwd.hash("Consumer123!"),
-                "role":          "consumer",
+                "username":      "User",
+                "email":         "user@lumina.com",
+                "password_hash": pwd.hash("User123!"),
+                "role":          "User",
                 "created_at":    datetime.utcnow().isoformat()
             })
 
