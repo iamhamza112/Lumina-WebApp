@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Lumina — Photo</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Lumina<span class="dot">.</span></div>
+  <div class="nav-links">
+    <a href="/browse" class="nav-link">← All photos</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-chip" id="nav-chip">CONSUMER</span>
+    <button class="btn btn-ghost btn-sm" onclick="doLogout()">Sign out</button>
+  </div>
+</nav>
+
+<div class="container page-wrap">
+
+  <div id="page-loader" class="loader-wrap"><div class="spinner"></div><span>Loading</span></div>
+
+  <div id="photo-content" style="display:none">
+    <div class="detail-grid">
+
+      <!-- IMAGE -->
+      <div>
+        <div class="detail-img-wrap">
+          <img id="photo-img" src="" alt=""/>
+        </div>
+        <div id="ai-tags-wrap" style="display:none;margin-top:1.4rem">
+          <div style="font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:1.6px;margin-bottom:10px">Detected tags</div>
+          <div class="tags-row" id="ai-tags"></div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="detail-sidebar">
+
+        <!-- Title + meta -->
+        <div class="detail-panel">
+          <h1 class="detail-title" id="photo-title">—</h1>
+          <div class="meta-row"><span class="meta-key">Caption</span><span class="meta-val" id="photo-caption">—</span></div>
+          <div class="meta-row"><span class="meta-key">Location</span><span class="meta-val" id="photo-location">—</span></div>
+          <div class="meta-row"><span class="meta-key">People</span><span class="meta-val" id="photo-people">—</span></div>
+          <div class="meta-row"><span class="meta-key">Creator</span><span class="meta-val" id="photo-creator">—</span></div>
+          <div class="meta-row"><span class="meta-key">Uploaded</span><span class="meta-val" id="photo-date">—</span></div>
+
+          <div class="rating-display">
+            <div class="rating-num" id="avg-rating">—</div>
+            <div class="stars" id="avg-stars"></div>
+            <div class="rating-sub" id="rating-count">0 ratings</div>
+          </div>
+        </div>
+
+        <!-- COMMENT INPUT — the focal field on this page -->
+        <div class="detail-panel">
+          <div class="panel-title">Leave a comment</div>
+
+          <div style="margin-bottom:1.2rem">
+            <div style="font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:1.6px;margin-bottom:8px">Your rating <span style="text-transform:none;letter-spacing:0;color:var(--ink-3)">— optional</span></div>
+            <div class="stars-input" id="star-input">
+              <span class="star" data-v="1" onclick="setRating(1)">★</span>
+              <span class="star" data-v="2" onclick="setRating(2)">★</span>
+              <span class="star" data-v="3" onclick="setRating(3)">★</span>
+              <span class="star" data-v="4" onclick="setRating(4)">★</span>
+              <span class="star" data-v="5" onclick="setRating(5)">★</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Your comment</label>
+            <textarea class="form-control" id="comment-text" placeholder="Share your thoughts on this photograph…"></textarea>
+          </div>
+
+          <button class="btn btn-primary btn-full" id="comment-btn" onclick="submitComment()">
+            <span id="comment-btn-txt">Post comment</span>
+            <span class="loader-inline" id="comment-ld" style="display:none"></span>
+          </button>
+        </div>
+
+        <!-- COMMENT LIST -->
+        <div class="detail-panel">
+          <div class="panel-title">Discussion</div>
+          <div id="comments-list">
+            <div class="loader-wrap" style="padding:1.5rem"><div class="spinner"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg"></span></div>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/consumer.js"></script>
+<script>
+  requireAuth();
+  let selectedRating=0;
+  function setRating(v){
+    selectedRating=v;
+    document.querySelectorAll('#star-input .star').forEach(s=>s.classList.toggle('active',parseInt(s.dataset.v)<=v));
+  }
+  window.addEventListener('DOMContentLoaded',()=>{
+    const id=new URLSearchParams(window.location.search).get('id');
+    if(!id){window.location.href='/browse';return;}
+    loadPhotoDetail(id);
+  });
+</script>
+</body>
+</html>
